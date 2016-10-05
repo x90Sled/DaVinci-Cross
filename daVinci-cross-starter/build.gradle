@@ -1,0 +1,32 @@
+group 'oz.msa.daVinci'
+version '1.0-SNAPSHOT'
+
+def mainClassName       =   "oz.msa.daVinci.Main"
+
+dependencies {
+    compile 'javassist:javassist:'+rootProject.ext.javassistVersion
+}
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'DaVinci-STARTER',
+                'Implementation-Description': 'daVinci-starter-project-test',
+                'Implementation-Version': version,
+                'Main-Class': "$mainClassName"
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+//task generateJniHeaders(type:Exec) {
+//    def classpath = sourceSets.main.output.classesDir
+//    def nativeIncludes = "src\\native\\include"
+//    commandLine "cd","build\\classes\\main"
+//    commandLine "javah","-classpath", classpath,"-d", nativeIncludes,"-jni","it.msa.NativeStringProducer"
+//    dependsOn classes
+//}
+//task buildJniHeaders(type: Copy){
+//    from "src\\native"
+//    into "D:\\VisualStudioProjects\\Projects\\NativeStringProducer\\NativeStringProducer"
+//    dependsOn generateJniHeaders
+//}

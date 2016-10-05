@@ -1,0 +1,3 @@
+rootProject.name = 'daVinci-cross-parent'
+include 'daVinci-cross-starter'
+
